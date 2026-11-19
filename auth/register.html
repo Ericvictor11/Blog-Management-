@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../assets/images/unn-tori-logo.png">
+    <meta name="description" content="Create an account in the UNN Tori interface.">
+    <title>Registration | UNN Tori</title>
+    <link rel="stylesheet" href="css/auth-shared.css">
+    <link rel="stylesheet" href="css/register.css">
+    <script src="js/password-visibility.js" defer></script>
+    <script src="js/register.js" defer></script>
+</head>
+<body class="auth-page">
+    <main class="auth-layout">
+        <section class="brand-panel" aria-label="UNN Tori">
+            <div class="brand-lockup">
+                <img class="brand-logo" src="../assets/images/unn-tori-logo.png" alt="UNN Tori logo">
+                <span class="brand-name">UNN Tori</span>
+            </div>
+
+            <div class="brand-story">
+                <span class="brand-rule" aria-hidden="true"></span>
+                <p class="brand-kicker">THE ADMIN WORKSPACE</p>
+                <p class="brand-statement">Every great story starts somewhere.</p>
+                <p>Welcome to the place where your ideas become stories worth sharing.</p>
+            </div>
+
+            <p class="brand-footer">Create thoughtfully. Publish confidently.</p>
+        </section>
+
+        <section class="auth-panel" aria-labelledby="register-heading">
+            <div class="auth-card">
+                <div class="card-accent" aria-hidden="true"></div>
+                <p class="eyebrow">ADMIN REGISTRATION</p>
+                <h1 id="register-heading">Create Account<span class="heading-period">.</span></h1>
+                <p class="intro">Set up your profile to start managing stories.</p>
+                <form id="register-form" novalidate>
+                    <div class="form-field">
+                        <label for="full-name">Full name</label>
+                        <input id="full-name" name="full-name" type="text" autocomplete="name" placeholder="Your full name" required aria-describedby="full-name-error">
+                        <p class="field-error" id="full-name-error" aria-live="polite"></p>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="email">Email address</label>
+                        <input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="email-error">
+                        <p class="field-error" id="email-error" aria-live="polite"></p>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="password">Password</label>
+                        <div class="password-field">
+                            <input id="password" name="password" type="password" autocomplete="new-password" placeholder="Create a password" minlength="8" required aria-describedby="password-hint password-strength-label password-error">
+                            <button class="password-toggle" id="password-toggle" type="button" aria-label="Show password" aria-pressed="false" aria-controls="password">
+                                <svg class="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                                    <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                                <svg class="icon-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                                    <path d="M10.6 6.1A11.8 11.8 0 0 1 12 6c6.5 0 10 6 10 6a16.9 16.9 0 0 1-3.1 3.6"></path>
+                                    <path d="M6.6 6.6A16.7 16.7 0 0 0 2 12s3.5 6 10 6a9.8 9.8 0 0 0 4.2-.9"></path>
+                                    <path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"></path>
+                                    <path d="M3 3l18 18"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="field-hint" id="password-hint">Use at least 8 characters.</p>
+                        <div class="strength-track" id="password-strength" role="meter" aria-label="Password strength" aria-valuemin="0" aria-valuemax="3" aria-valuenow="0" aria-valuetext="No password entered">
+                            <span class="strength-fill" data-strength="none"></span>
+                        </div>
+                        <p class="strength-label" id="password-strength-label" aria-live="polite">Strength: not yet entered</p>
+                        <p class="field-error" id="password-error" aria-live="polite"></p>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="confirm-password">Confirm password</label>
+                        <div class="password-field">
+                            <input id="confirm-password" name="confirm-password" type="password" autocomplete="new-password" placeholder="Re-enter your password" required aria-describedby="confirm-password-error">
+                            <button class="password-toggle" id="confirm-password-toggle" type="button" aria-label="Show confirmation password" aria-pressed="false" aria-controls="confirm-password">
+                                <svg class="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                                    <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                                <svg class="icon-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                                    <path d="M10.6 6.1A11.8 11.8 0 0 1 12 6c6.5 0 10 6 10 6a16.9 16.9 0 0 1-3.1 3.6"></path>
+                                    <path d="M6.6 6.6A16.7 16.7 0 0 0 2 12s3.5 6 10 6a9.8 9.8 0 0 0 4.2-.9"></path>
+                                    <path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"></path>
+                                    <path d="M3 3l18 18"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="field-error" id="confirm-password-error" aria-live="polite"></p>
+                    </div>
+
+                    <button class="submit-button" type="submit">Create account <span aria-hidden="true">&rarr;</span></button>
+                    <p class="form-status" id="form-status" role="status" hidden></p>
+                </form>
+
+                <p class="auth-prompt">Already have an account? <a href="login.html">Log in</a></p>
+            </div>
+            <p class="page-footer">UNN Tori &middot; Admin access</p>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,52 @@
+/* Registration-only controls; common authentication styles are in auth-shared.css. */
+.auth-page .auth-card {
+    width: min(100%, 34rem);
+}
+
+.auth-page .field-hint,
+.auth-page .strength-label {
+    margin: 0.45rem 0 0;
+    color: var(--auth-muted);
+    font-size: 0.8rem;
+}
+
+.auth-page .strength-track {
+    overflow: hidden;
+    height: 0.4rem;
+    margin-top: 0.85rem;
+    border-radius: 999px;
+    background: #E9E6E4;
+}
+
+.auth-page .strength-fill {
+    display: block;
+    width: 0;
+    height: 100%;
+    border-radius: inherit;
+    transition: width 160ms ease, background-color 160ms ease;
+}
+
+.auth-page .strength-fill[data-strength="weak"] {
+    width: 33.333%;
+    background: var(--auth-error);
+}
+
+.auth-page .strength-fill[data-strength="medium"] {
+    width: 66.666%;
+    background: #8B711F;
+}
+
+.auth-page .strength-fill[data-strength="strong"] {
+    width: 100%;
+    background: #286644;
+}
+
+.auth-page .submit-button {
+    margin-top: 1.75rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .auth-page .strength-fill {
+        transition: none;
+    }
+}
