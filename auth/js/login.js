@@ -3,6 +3,7 @@
 
     const form = document.querySelector('#login-form');
     if (!form) return;
+    const temporaryAuth = window.UnnToriTemporaryAuth;
     const email = document.querySelector('#email');
     const password = document.querySelector('#password');
     const status = document.querySelector('#form-status');
@@ -73,9 +74,20 @@
             return;
         }
 
-        status.dataset.kind = 'error';
-        status.setAttribute('role', 'alert');
-        status.textContent = 'Login is unavailable.';
+        const result = temporaryAuth.checkCredentials(email.value, password.value);
+        if (!result.ok) {
+            status.dataset.kind = 'error';
+            status.setAttribute('role', 'alert');
+            status.textContent = result.reason === 'storage-unavailable'
+                ? 'Session storage is unavailable here. Try opening these pages from a local static server.'
+                : 'Invalid email or password.';
+            status.hidden = false;
+            return;
+        }
+
+        status.dataset.kind = 'success';
+        status.setAttribute('role', 'status');
+        status.innerHTML = '<span class="login-success-icon" aria-hidden="true">&#10004;</span><span>Login Successful.</span>';
         status.hidden = false;
     });
 })();

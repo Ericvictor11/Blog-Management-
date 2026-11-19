@@ -3,6 +3,7 @@
 
     const form = document.querySelector('#register-form');
     if (!form) return;
+    const temporaryAuth = window.UnnToriTemporaryAuth;
     const fullName = document.querySelector('#full-name');
     const email = document.querySelector('#email');
     const password = document.querySelector('#password');
@@ -11,6 +12,7 @@
     const strengthFill = document.querySelector('.strength-fill');
     const strengthLabel = document.querySelector('#password-strength-label');
     const status = document.querySelector('#form-status');
+    const duplicateEmailMessage = 'This email address is already registered. Please log in or use another email.';
 
     const fields = [
         { input: fullName, error: document.querySelector('#full-name-error') },
@@ -31,6 +33,10 @@
 
         if (input === email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
             return 'Enter a valid email address.';
+        }
+
+        if (input === email && temporaryAuth.isEmailRegistered(value)) {
+            return duplicateEmailMessage;
         }
 
         if (input === password && input.value.length < 8) {
@@ -131,14 +137,45 @@
             }
         });
 
+        if (fields[1].error.textContent === duplicateEmailMessage) {
+            email.focus();
+            return;
+        }
+
         if (firstInvalid) {
             firstInvalid.focus();
             return;
         }
 
-        status.dataset.kind = 'error';
-        status.setAttribute('role', 'alert');
-        status.textContent = 'Account registration is unavailable.';
+        const result = temporaryAuth.registerAccount({
+            name: fullName.value,
+            email: email.value,
+            password: password.value
+        });
+
+        if (!result.ok) {
+            if (result.reason === 'duplicate') {
+                document.querySelector('#email-error').textContent = duplicateEmailMessage;
+                email.setAttribute('aria-invalid', 'true');
+                email.focus();
+                return;
+            }
+
+            status.dataset.kind = 'error';
+            status.setAttribute('role', 'alert');
+            status.textContent = result.reason === 'storage-unavailable'
+                ? 'Session storage is unavailable here. Try opening these pages from a local static server.'
+                : 'Please check the form and try again.';
+            status.hidden = false;
+            return;
+        }
+
+        password.value = '';
+        confirmPassword.value = '';
+        updateStrength();
+        status.dataset.kind = 'success';
+        status.setAttribute('role', 'status');
+        status.textContent = 'Registration saved for this session. Continue to Login.';
         status.hidden = false;
     });
 })();
